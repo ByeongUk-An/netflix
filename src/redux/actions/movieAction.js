@@ -1,21 +1,21 @@
 import api from "../api"
 
+
+const API_KEY = process.env.REACT_APP_API_KEY;
 function getMovies() {
 
     return async (dispatch) => {
-    const popularMovieApi = await api.get(`/movie/popular?api_key=f3341ae37fe392613293736e7f266ef5&language=en-US&page=1`)
+    const popularMovieApi =  api.get(`/movie/popular?api_key=${API_KEY}&language=en-US&page=1`);
 
-        // const url = `/movie/popular?api_key=f3341ae37fe392613293736e7f266ef5&language=en-US&page=1`;
-        // const response = await fetch(url);
-        // const data = await response.json()
-        //
-        // const url2 = `/movie/top_rated?api_key=f3341ae37fe392613293736e7f266ef5&language=en-US&page=1`;
-        // const response2 = await fetch(url2);
-        // const data2 = await response2.json()
-        //
-        // const url3 = `/movie/upcoming?api_key=f3341ae37fe392613293736e7f266ef5&language=en-US&page=1`;
-        // const response3 = await fetch(url3);
-        // const data3 = await response3.json()
+    const topRatedApi =  api.get(`/movie/top_rated?api_key=${API_KEY}&language=en-US&page=1`);
+
+    const upComingApi =  api.get(`/movie/upcoming?api_key=${API_KEY}&language=en-US&page=1`);
+
+    // Api를 동시에 부르기 위해 사용 -> 각각의 변수에 await를 안써주고 한번만 사용
+    const [popularMovies,topRatedMovies,upComingMovies] = await Promise.all([popularMovieApi,topRatedApi,upComingApi]);
+
+
+
     }
 }
 
