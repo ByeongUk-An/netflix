@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
-import {Link} from "react-router-dom"
+import {Link} from "react-router-dom";
+import SearchIcon from '@mui/icons-material/Search';
 
 
 const Wrapper = styled.div`
@@ -50,6 +51,11 @@ const RightNav = styled.div`
     align-items:center;
     height:100%;
     
+    & form {
+        height:37px;
+        display:flex;
+    }
+    
     & input {
         padding:8px;
         border-radius:5px;
@@ -58,10 +64,24 @@ const RightNav = styled.div`
         line-height:31px;
     }
     & button {
-        padding:10px;
+        width:31px;
         border-radius:5px;
-        background-color:#1363DF;
-        color:white;
+        background-color:#000;
+        border: 1px solid #8F4A51;
+        color:#8F4A51;
+        height:31px;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+    }
+    & button:hover {
+        border: 1px solid #F40B11;
+    }
+    & .search-icon {
+        font-size:20px;
+    }
+    & button:hover .search-icon {
+        color:#F40B11;
     }
 `;
 
@@ -83,7 +103,7 @@ const Navigation = (props) => {
                     <RightNav>
                         <form>
                             <input type="text" placeholder="Search"/>
-                            <button type="submit">Search</button>
+                            <button type="submit"><SearchIcon className="search-icon"/></button>
                         </form>
                     </RightNav>
                 </Container>

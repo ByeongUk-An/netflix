@@ -8,6 +8,9 @@ export default createGlobalStyle`
         box-sizing : border-box;
         
     }
+    body {
+        background-color:#1E2428;
+    }
     
     input, textarea, button {
         outline : none;
