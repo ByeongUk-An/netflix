@@ -1,9 +1,10 @@
 import React from 'react';
+import Navigation from "../components/Navigation";
 
 const Movies = (props) => {
     return(
         <>
-        <h1>Movie</h1>
+        <Navigation/>
         </>
     )
 }
