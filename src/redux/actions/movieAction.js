@@ -6,23 +6,32 @@ const API_KEY = process.env.REACT_APP_API_KEY;
 function getMovies() {
 
     return async (dispatch) => {
-        const popularMovieApi = api.get(`/movie/popular?api_key=${API_KEY}&language=en-US&page=1`);
+        
+        try {
+            dispatch({type:"GET_MOVIES_REQUEST"})  // 데이터 도착전 로딩 스피너 값 바꿔주기
+            const popularMovieApi = api.get(`/movie/popular?api_key=${API_KEY}&language=en-US&page=1`);
 
-        const topRatedApi = api.get(`/movie/top_rated?api_key=${API_KEY}&language=en-US&page=1`);
+            const topRatedApi = api.get(`/movie/top_rated?api_key=${API_KEY}&language=en-US&page=1`);
 
-        const upComingApi = api.get(`/movie/upcoming?api_key=${API_KEY}&language=en-US&page=1`);
+            const upComingApi = api.get(`/movie/upcoming?api_key=${API_KEY}&language=en-US&page=1`);
 
-        // Api를 동시에 부르기 위해 사용 -> 각각의 변수에 await를 안써주고 한번만 사용
-        const [popularMovies, topRatedMovies, upComingMovies] = await Promise.all([popularMovieApi, topRatedApi, upComingApi]);
+            // Api를 동시에 부르기 위해 사용 -> 각각의 변수에 await를 안써주고 한번만 사용
+            const [popularMovies, topRatedMovies, upcomingMovies] = await Promise.all([popularMovieApi, topRatedApi, upComingApi]);
 
-        dispatch({
-            type: "GET_MOVIES_SUCCESS",
-            payload: {
-                popularMovies: popularMovies.data,
-                topRatedMovies: topRatedMovies.data,
-                upComingMovies: upComingMovies.data
-            }
-        })
+            //도착후
+
+            dispatch({
+                type: "GET_MOVIES_SUCCESS",
+                payload: {
+                    popularMovies: popularMovies.data,
+                    topRatedMovies: topRatedMovies.data,
+                    upcomingMovies: upcomingMovies.data,
+                }
+            })
+        }catch(error) {
+            dispatch({type: "GET_MOVIES_FAILURE"})
+        }
+
 
     }
 }
