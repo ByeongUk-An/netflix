@@ -1,8 +1,12 @@
 import React from 'react';
+import Navigation from "../components/Navigation";
 
 const MovieDetail = (props) => {
-    return(
-        <h1>Detail</h1>
+    return (
+        <>
+            <Navigation/>
+            <h1>hello</h1>
+        </>
     )
 }
 

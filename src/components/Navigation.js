@@ -12,7 +12,7 @@ const Wrapper = styled.div`
 `;
 
 const Container = styled.div`
-    margin:0 auto;
+    margin:0 80px;
     max-width:1800px;
     height:120px;
     color:#fff;
