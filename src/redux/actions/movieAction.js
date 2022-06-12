@@ -21,7 +21,7 @@ function getMovies() {
             const [popularMovies, topRatedMovies, upcomingMovies,genreList] = await Promise.all([popularMovieApi, topRatedApi, upComingApi,genreApi]);
 
             //도착후
-            console.log("장르리스트",genreList)
+
 
             dispatch({
                 type: "GET_MOVIES_SUCCESS",
