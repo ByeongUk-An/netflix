@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Navigation from "../components/Navigation";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import api from "../redux/api";
@@ -10,6 +10,8 @@ import Box from '@mui/material/Box';
 // import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import YouTube from 'react-youtube';
+import RelatedMovie from "../components/RelatedMovie";
+import Review from "../components/Reviews";
 
 const style = {
     position: 'absolute',
@@ -35,7 +37,6 @@ const opts = {
 const RiviewWrap = styled.div`
   display: flex;
   justify-content: center;
-  height: 1000px;
 
 
   & button {
@@ -60,11 +61,47 @@ const RiviewWrap = styled.div`
   }
 `;
 
+const ReviewWrap = styled.div`
+  margin-left: 30px;
+  margin-bottom: 50px;
+  & button {
+    padding: 1em;
+  }
+
+  & button:hover {
+    transform: scale(1.1);
+    transition: 0.5s;
+  }
+
+  & .review {
+    background-color: red;
+    color: #fff;
+    margin-right: 20px;
+  }
+
+  & .related {
+    color: red;
+  }
+`;
+const ReviewContainer = styled.div`
+  max-width: 1400px;
+  height: 1000px;
+  margin: 80px auto;
+`;
+const ReviewBoarder = styled.div`
+  border: 2px solid #fff;
+  padding: 60px 30px;
+`;
+
+
 const MovieDetail = (props) => {
     const API_KEY = process.env.REACT_APP_API_KEY;
+    const navigate = useNavigate();
     const {id} = useParams();
     const [data, setData] = useState();
     const [video, setVideo] = useState();
+    const [review, setReview] = useState(true);
+    const [reviewData,setReviewData] = useState();
     const {popularMovies, topRatedMovies, upcomingMovies} = useSelector(state => state.movie);
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -78,6 +115,10 @@ const MovieDetail = (props) => {
         const result = await api.get(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}&language=en-US`);
         return result;
     }
+    const reviewMovie = async () => {
+        const result = await api.get(`https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${API_KEY}&language=en-US&page=1`);
+        return result;
+    }
 
 
     useEffect(() => {
@@ -87,9 +128,11 @@ const MovieDetail = (props) => {
         videoMovie().then((res) => {
             setVideo(res);
         })
+        reviewMovie().then((res)=> {
+            setReviewData(res.data);
+        })
     }, []);
 
-    
 
     return (
         <>
@@ -106,17 +149,18 @@ const MovieDetail = (props) => {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    {/*<Typography id="modal-modal-title" variant="h6" component="h2">*/}
-                    {/*    Text in a modal*/}
-                    {/*</Typography>*/}
-                    {/*<Typography id="modal-modal-description" sx={{ mt: 2 }}>*/}
-                    {/*    Duis mollis, est non commodo luctus, nisi erat porttitor ligula.*/}
-                    {/*</Typography>*/}
-                    {/*onReady={this._onReady}*/}
-                    {video && <YouTube videoId={video.data.results[0].key} opts={opts}  />}
-
+                    {video && <YouTube videoId={video.data.results[0].key} opts={opts}/>}
                 </Box>
             </Modal>
+            <ReviewContainer>
+                <ReviewWrap>
+                    {reviewData && <button className="review" type="button" onClick={() => setReview(true)}>REVIEWS ({reviewData.results.length})</button>}
+                    <button className="related" type="button" onClick={() => setReview(false)}>RELATED MOVIES</button>
+                </ReviewWrap>
+                <ReviewBoarder>
+                    {review ? (reviewData && <Review review={reviewData}/>) : <RelatedMovie/>}
+                </ReviewBoarder>
+            </ReviewContainer>
         </>
     )
 }
