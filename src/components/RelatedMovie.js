@@ -1,5 +1,6 @@
-import React,{useEffect} from 'react';
-import {Link, useLocation, useNavigate} from "react-router-dom";
+import React,{useEffect,useState} from 'react';
+import {useLocation, useNavigate} from "react-router-dom";
+
 import styled from "styled-components";
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import StarIcon from '@mui/icons-material/Star';
@@ -43,13 +44,14 @@ const RelatedItem = styled.div`
 
 const RelatedMovie = ({related}) => {
     const {results} = related;
-
     const navigate = useNavigate();
+    const location = useLocation();
+
 
 
     useEffect(() => {
 
-    }, []);
+    }, [location]);
 
 
     return (
@@ -57,7 +59,7 @@ const RelatedMovie = ({related}) => {
             <RelatedListWrap>
                 {results.map((item,index)=> {
                     return <RelatedList key={index}>
-                        <div onClick={()=> navigate(`/movies/${item.id}`)}  className="item-link">
+                        <div onClick={()=> navigate(`/movies/${item.id}`,{replace:true})}  className="item-link">
                             <RelatedItem>
                                 <div><img src={`https://image.tmdb.org/t/p/w1920_and_h800_multi_faces${item.backdrop_path}`} alt=""/></div>
                                 <p>{item.original_title}</p>

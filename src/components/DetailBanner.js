@@ -76,7 +76,7 @@ const BgWrap = styled.div`
 
 const DetailBanner = ({movie}) => {
     const {data} = movie;
-    console.log(data);
+
     return (
         <>
             <BgWrap img={`https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces${data.poster_path}`}>
