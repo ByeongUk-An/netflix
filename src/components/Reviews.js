@@ -26,7 +26,7 @@ const ReviewContent = styled.div`
 
 const Reviews = ({review}) => {
     const {results} = review;
-    console.log(results)
+
     return (
         <>
             <ul>

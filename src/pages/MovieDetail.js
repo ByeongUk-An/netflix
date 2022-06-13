@@ -102,6 +102,7 @@ const MovieDetail = (props) => {
     const [video, setVideo] = useState();
     const [review, setReview] = useState(true);
     const [reviewData,setReviewData] = useState();
+    const [related,setReLated] = useState();
     const {popularMovies, topRatedMovies, upcomingMovies} = useSelector(state => state.movie);
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -119,6 +120,10 @@ const MovieDetail = (props) => {
         const result = await api.get(`https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${API_KEY}&language=en-US&page=1`);
         return result;
     }
+    const relatedMovie = async () => {
+        const result = await api.get(`https://api.themoviedb.org/3/movie/${id}/similar?api_key=${API_KEY}&language=en-US&page=1`);
+        return result
+    }
 
 
     useEffect(() => {
@@ -130,6 +135,9 @@ const MovieDetail = (props) => {
         })
         reviewMovie().then((res)=> {
             setReviewData(res.data);
+        })
+        relatedMovie().then((res)=> {
+            setReLated(res.data);
         })
     }, []);
 
@@ -158,7 +166,7 @@ const MovieDetail = (props) => {
                     <button className="related" type="button" onClick={() => setReview(false)}>RELATED MOVIES</button>
                 </ReviewWrap>
                 <ReviewBoarder>
-                    {review ? (reviewData && <Review review={reviewData}/>) : <RelatedMovie/>}
+                    {review ? (reviewData && <Review review={reviewData}/>) : (related && <RelatedMovie related={related}/>)}
                 </ReviewBoarder>
             </ReviewContainer>
         </>

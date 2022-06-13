@@ -1,9 +1,80 @@
-import React from 'react';
+import React,{useEffect} from 'react';
+import {Link, useLocation, useNavigate} from "react-router-dom";
+import styled from "styled-components";
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import StarIcon from '@mui/icons-material/Star';
 
-const RelatedMovie = (props) => {
+
+const RelatedListWrap = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+const RelatedList = styled.li`
+  width: calc(100% / 4) ;
+  padding: 1em;
+  margin-bottom: 10px;
+  & .item-link {
+    cursor: pointer;
+    color: #fff;
+  }
+`;
+
+const RelatedItem = styled.div`
+  & div img {
+    width: 100%;
+    height: 200px;
+    margin-bottom: 15px;
+  }
+  & p {
+    margin-bottom: 10px;
+  }
+  & .calendar-wrap {
+    display: flex;
+    align-items: center;
+    ;
+  }
+  & .calendar-wrap span {
+    margin-left: 5px;
+    margin-right: 15px;
+  }
+  
+`
+
+const RelatedMovie = ({related}) => {
+    const {results} = related;
+
+    const navigate = useNavigate();
+
+
+    useEffect(() => {
+
+    }, []);
+
+
     return (
         <>
-            <h1>Related</h1>
+            <RelatedListWrap>
+                {results.map((item,index)=> {
+                    return <RelatedList key={index}>
+                        <div onClick={()=> navigate(`/movies/${item.id}`)}  className="item-link">
+                            <RelatedItem>
+                                <div><img src={`https://image.tmdb.org/t/p/w1920_and_h800_multi_faces${item.backdrop_path}`} alt=""/></div>
+                                <p>{item.original_title}</p>
+                                <div className="calendar-wrap">
+                                    <CalendarMonthIcon/>
+                                    <span>{item.release_date}</span>
+                                    <StarIcon/>
+                                    <span>{item.vote_average.toFixed(1)}</span>
+                                </div>
+                            </RelatedItem>
+                        </div>
+                    </RelatedList>
+                })}
+
+
+
+            </RelatedListWrap>
         </>
     )
 }

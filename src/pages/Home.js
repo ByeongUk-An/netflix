@@ -42,7 +42,6 @@ const Home = (props) => {
     return(
         <>
         <Navigation/>
-            {console.log(topRatedMovies)}
             <Banner movie={popularMovies.results[random]}/>
             <Wrapper>
                 <Title>Popular Movie</Title>
