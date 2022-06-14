@@ -31,16 +31,17 @@ const Reviews = ({review}) => {
         <>
             <ul>
                 {results.map((item,index)=> {
+
                     return <ReviewList key={index}>
-                        <UserWrap>
-                            <AccountCircleOutlinedIcon/>
-                            <span>{item.author}</span>
-                        </UserWrap>
-                        <ReviewContent>
-                            {item.content}
-                            <div>{item.updated_at}</div>
-                        </ReviewContent>
-                    </ReviewList>
+                            <UserWrap>
+                                <AccountCircleOutlinedIcon/>
+                                <span>{item.author}</span>
+                            </UserWrap>
+                            <ReviewContent>
+                                {item.content}
+                                <div>{item.updated_at}</div>
+                            </ReviewContent>
+                        </ReviewList>
                 })}
 
 

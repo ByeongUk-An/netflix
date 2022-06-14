@@ -15,7 +15,7 @@ function getMovies() {
 
             const upComingApi = api.get(`/movie/upcoming?api_key=${API_KEY}&language=en-US&page=1`);
 
-            const genreApi = api.get(`/genre/movie/list?api_key=${API_KEY}&language=en-US`)
+            const genreApi = api.get(`/genre/movie/list?api_key=${API_KEY}&language=en-US`);
 
             // Api를 동시에 부르기 위해 사용 -> 각각의 변수에 await를 안써주고 한번만 사용
             const [popularMovies, topRatedMovies, upcomingMovies,genreList] = await Promise.all([popularMovieApi, topRatedApi, upComingApi,genreApi]);

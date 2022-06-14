@@ -49,9 +49,7 @@ const RelatedMovie = ({related}) => {
 
 
 
-    useEffect(() => {
 
-    }, [location]);
 
 
     return (
@@ -59,9 +57,9 @@ const RelatedMovie = ({related}) => {
             <RelatedListWrap>
                 {results.map((item,index)=> {
                     return <RelatedList key={index}>
-                        <div onClick={()=> navigate(`/movies/${item.id}`,{replace:true})}  className="item-link">
+                        <div className="item-link">
                             <RelatedItem>
-                                <div><img src={`https://image.tmdb.org/t/p/w1920_and_h800_multi_faces${item.backdrop_path}`} alt=""/></div>
+                                <div><a href={`/movies/${item.id}`}><img src={`https://image.tmdb.org/t/p/w1920_and_h800_multi_faces${item.backdrop_path}`} alt=""/></a></div>
                                 <p>{item.original_title}</p>
                                 <div className="calendar-wrap">
                                     <CalendarMonthIcon/>

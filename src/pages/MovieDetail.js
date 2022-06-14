@@ -103,7 +103,7 @@ const MovieDetail = (props) => {
     const [review, setReview] = useState(true);
     const [reviewData,setReviewData] = useState();
     const [related,setReLated] = useState();
-    const {popularMovies, topRatedMovies, upcomingMovies} = useSelector(state => state.movie);
+    // const {popularMovies, topRatedMovies, upcomingMovies} = useSelector(state => state.movie);  추후확인
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
