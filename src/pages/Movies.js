@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Navigation from "../components/Navigation";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import Sort from "../components/Sort"
 import MovieItem from "../components/MovieItem";
+import api from "../redux/api";
 
 const Wrapper = styled.div`
   max-width: 1760px;
@@ -19,23 +20,37 @@ const Wrapper = styled.div`
 `;
 
 const Movies = (props) => {
+    const API_KEY = process.env.REACT_APP_API_KEY;
     const {popularMovies, topRatedMovies, upcomingMovies, loading} = useSelector(state => state.movie);
-    console.log(popularMovies)
+    const [url,setUrl] = useState('/movie/popular');
+    const [list,setList] = useState();
+    const [range,setRange] = useState(2022);
+
+    useEffect(()=> {
+        (async() => {
+            const list = await api.get(`${url}?api_key=${API_KEY}&language=en-US&page=1`)
+            const {data} = list;
+            setList(data);
+        })();
+    },[url,range])
+
+    const isRange = (item) => {
+        const release = item.release_date.substr(0,4);
+        if(range == release) {
+            return true;
+        }
+    }
+
     return (
         <>
             <Navigation/>
             <Wrapper>
-            <Sort movies={popularMovies}/>
+            <Sort setUrl={setUrl} setRange={setRange}/>
                 <div className="right-movie">
 
-                    {/*{popularMovies&& popularMovies.results.sort((a, b) => b.vote_average - a.vote_average).map((item,index)=> {*/}
-                    {/*    return<MovieItem key={index} item={item}/>*/}
-                    {/*})}*/}
-                    {popularMovies?.results.map((item,index)=> {
+                    {list?.results.filter(isRange).map((item,index) => {
                         return <MovieItem key={index} item={item}/>
                     })}
-
-
                 </div>
             </Wrapper>
         </>

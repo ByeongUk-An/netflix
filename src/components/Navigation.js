@@ -1,6 +1,6 @@
-import React from 'react';
+import React,{useState} from 'react';
 import styled from "styled-components";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import SearchIcon from '@mui/icons-material/Search';
 
 
@@ -87,6 +87,12 @@ const RightNav = styled.div`
 
 
 const Navigation = (props) => {
+    const [search,setSearch] = useState("");
+    const navigate =useNavigate();
+    const submitform = () => {
+        navigate(`/searchmovie/${search}`);
+    }
+
     return (
         <>
             <Wrapper>
@@ -101,8 +107,8 @@ const Navigation = (props) => {
                         </ul>
                     </LeftNav>
                     <RightNav>
-                        <form>
-                            <input type="text" placeholder="Search"/>
+                        <form onSubmit={submitform}>
+                            <input type="text" placeholder="Search" value={search} onChange={(e)=> setSearch(e.target.value)} />
                             <button type="submit"><SearchIcon className="search-icon"/></button>
                         </form>
                     </RightNav>

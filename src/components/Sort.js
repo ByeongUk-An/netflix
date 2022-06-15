@@ -93,19 +93,24 @@ const PrettoSlider = styled(Slider)({
 });
 
 
-const Sort = ({movies}) => {
+const Sort = ({setUrl,setRange}) => {
 
-const [select,setSelect] = useState("");
+    const url = [
+        {url : `/movie/popular`,name : `Popular Movie`},
+        {url : `/movie/top_rated`,name: `Top Rated Movie`},
+        {url : `/movie/upcoming`, name: `Upcoming Movie`},
+    ]
 
-console.log(select)
+
+
     return (
         <Wrapper>
             <Container>
                 <h2>Sort</h2>
-                <select name='fruits' onChange={(e)=>setSelect(e.target.value)}>
-                    <option value='Popularity(Desc)' >인기영화</option>
-                    <option value='Popularity(Asc)'>Popularity(Asc)</option>
-                    <option value='Release Day(Desc)'>Release Day(Desc)</option>
+                <select name='fruits' onChange={(e)=>setUrl(e.target.value)}>
+                    {url.map((type,index) => {
+                        return <option key={index} value={type.url}>{type.name}</option>
+                    })}
                 </select>
             </Container>
             <Container2>
@@ -114,7 +119,7 @@ console.log(select)
                 <Box width={334}>
                         <h3>연도별</h3>
                     <PrettoSlider
-                        defaultValue={1950} min={1920} max={2022} aria-label="Default" valueLabelDisplay="auto"/>
+                        defaultValue={2022} min={1920} max={2022} aria-label="Default" valueLabelDisplay="auto" onChange={(e)=> setRange(e.target.value)}/>
                 </Box>
             </Container2>
         </Wrapper>
