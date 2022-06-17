@@ -6,13 +6,16 @@ import {useNavigate} from "react-router-dom";
 
 const Card = styled.div`
   background-image: url(${props => props.img});
-  width: 300px;
+  width: 100%;
   height: 200px;
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
   cursor: pointer;
   &:hover {
-    //transform: scale(2);
+    //transform: scale(1.1);
+    transition: 0.5s;
+    height: 300px;
   }
   &:hover .over-wrap {
     opacity: 1;

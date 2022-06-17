@@ -4,6 +4,7 @@ import 'react-multi-carousel/lib/styles.css';
 import MovieCard from "./MovieCard";
 import "./styles/movieSlide.css"
 
+
 const responsive = {
     superLargeDesktop: {
         // the naming can be any, depends on you.
@@ -11,15 +12,15 @@ const responsive = {
         items: 6
     },
     desktop: {
-        breakpoint: {max: 3000, min: 1200},
+        breakpoint: {max: 3000, min: 1024},
         items: 5
     },
     tablet: {
-        breakpoint: {max: 1200, min: 1000},
+        breakpoint: {max: 1024, min: 464},
         items: 3
     },
     mobile: {
-        breakpoint: {max: 1000, min: 0},
+        breakpoint: {max: 464, min: 0},
         items: 1
     }
 };

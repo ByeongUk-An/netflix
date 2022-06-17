@@ -4,13 +4,15 @@ import styled from 'styled-components';
 const BgWrap = styled.div`
   background-image: url(${props => props.img});
   width: 100%;
-  height: 700px;
+  height: 100vh;
   background-repeat: no-repeat;
-  //background-size: cover;
+  background-size: cover;
+  background-position: center;
   position: relative;
   display: flex;
   align-items: center;
   z-index: -2;
+  margin-bottom: 30px;
   
   &:before {
     content: "";
@@ -41,10 +43,24 @@ const BgWrap = styled.div`
     font-size: 60px;
     font-weight: bold;
     margin-bottom: 30px;
+    line-height: 1.2;
   }
   & div p {
     line-height: 2;
     font-size: 18px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    & div {
+      width: 100%;
+      margin: 0;
+      padding: 0 20px;
+    }
+    & div h1 {
+      font-size: 40px;
+      
+      line-height: 1.4;
+    }
   }
   
 `;

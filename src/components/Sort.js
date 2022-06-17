@@ -7,6 +7,11 @@ import Slider from '@mui/material/Slider';
 const Wrapper = styled.div`
   width: 400px;
   margin-right: 30px;
+  @media only screen and (max-width: 1024px) {
+    width: 100%;
+    margin-right: 0;
+    padding: 1em;
+  }
 `;
 
 const Container = styled.div`
@@ -53,7 +58,7 @@ const Container2 = styled.div`
 `;
 
 const PrettoSlider = styled(Slider)({
-    color: '#52af77',
+    color: 'red',
     height: 8,
 
     '& .MuiSlider-track': {
@@ -116,7 +121,7 @@ const Sort = ({setUrl,setRange}) => {
             <Container2>
                 <h2>Filter</h2>
 
-                <Box width={334}>
+                <Box >
                         <h3>연도별</h3>
                     <PrettoSlider
                         defaultValue={2022} min={1920} max={2022} aria-label="Default" valueLabelDisplay="auto" onChange={(e)=> setRange(e.target.value)}/>

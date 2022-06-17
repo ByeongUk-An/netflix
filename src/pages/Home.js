@@ -4,17 +4,31 @@ import {movieAction} from "../redux/actions/movieAction";
 import {useDispatch, useSelector} from "react-redux";
 import Banner from "../components/Banner";
 import MovieSlide from "../components/MovieSlide";
-import styled from "styled-components";
+import styled,{css} from "styled-components";
 import ClipLoader from "react-spinners/ClipLoader";
 
 
 const Wrapper = styled.div`
-  margin-left: 100px;
+  //margin-left: 100px;
 `;
 
 const Title = styled.h2`
   font-size: 40px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+
+  @media only screen and (max-width: 768px) {
+    text-align: center;
+    
+  }
+`;
+
+const override = css`
+  border-color: red;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 `;
 
 const Home = (props) => {
@@ -35,7 +49,7 @@ const Home = (props) => {
     // false : 데이터 도착 후 , 에러 났을떄
 
     if(loading) {
-        return <ClipLoader color={"#fff"} loading={loading}  size={150} />
+        return <ClipLoader color={"#fff"} loading={loading} css={override}  size={150} />
     }
 
 

@@ -70,7 +70,25 @@ const BgWrap = styled.div`
     margin-right: 15px;
     margin-left: 5px;
   }
-
+  @media only screen and (max-width: 768px) {
+    height: 500px;
+    & div {
+      width: 100%;
+      margin: 0;
+      padding: 0 20px;
+      //justify-content: flex-start;
+      //align-items: center;
+      justify-content: center;
+    }
+    & div h1 {
+      font-size: 30px;
+      text-align: center;
+      line-height: 1.4;
+    }
+    & div p {
+      width: 100%;
+    }
+  }
   
 `;
 

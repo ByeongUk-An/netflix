@@ -1,17 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import Navigation from "../components/Navigation";
 import {useNavigate, useParams} from "react-router-dom";
-import styled from "styled-components";
+import styled,{css} from "styled-components";
 import {useSelector} from "react-redux";
 import api from "../redux/api";
 import DetailBanner from "../components/DetailBanner";
 import Box from '@mui/material/Box';
-// import Button from '@mui/material/Button';
-// import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import YouTube from 'react-youtube';
 import RelatedMovie from "../components/RelatedMovie";
 import Review from "../components/Reviews";
+
+import ClipLoader from "react-spinners/ClipLoader";
 
 const style = {
     position: 'absolute',
@@ -25,14 +25,18 @@ const opts = {
     height: '690',
     width: '1040',
     playerVars: {
-        // https://developers.google.com/youtube/player_parameters
         autoplay: 1,
     }
 }
-//  _onReady(event) {
-//     // access to player in all event handlers via event.target
-//     event.target.pauseVideo();
-// }
+
+const override = css`
+  border-color: red;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+`;
+
 
 const RiviewWrap = styled.div`
   display: flex;
@@ -91,6 +95,9 @@ const ReviewContainer = styled.div`
 const ReviewBoarder = styled.div`
   border: 2px solid #fff;
   padding: 60px 30px;
+  @media only screen and (max-width: 768px) {
+    border: none;
+  }
 `;
 
 
@@ -103,7 +110,7 @@ const MovieDetail = (props) => {
     const [review, setReview] = useState(true);
     const [reviewData,setReviewData] = useState();
     const [related,setReLated] = useState();
-    // const {popularMovies, topRatedMovies, upcomingMovies} = useSelector(state => state.movie);  추후확인
+    const [loading,setLoading] = useState(false);
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -127,20 +134,27 @@ const MovieDetail = (props) => {
 
 
     useEffect(() => {
+        setLoading(true);
         detailMovie().then((res) => {
             setData(res);
+            setLoading(false);
         })
         videoMovie().then((res) => {
             setVideo(res);
+            setLoading(false);
         })
         reviewMovie().then((res)=> {
             setReviewData(res.data);
+            setLoading(false);
         })
         relatedMovie().then((res)=> {
             setReLated(res.data);
+            setLoading(false);
         })
     }, []);
-
+    if(loading) {
+        return <ClipLoader color={"#fff"} loading={loading} css={override}  size={150} />
+    }
 
     return (
         <>

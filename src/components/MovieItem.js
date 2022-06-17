@@ -6,7 +6,8 @@ import StarIcon from "@mui/icons-material/Star";
 import {useSelector} from "react-redux";
 
 const Wrapper = styled.div`
-  width: calc((100%/4 - 20px)) ;
+  //width: calc((100%/4 - 20px)) ;
+  width: 316px;
   height: 500px;
   background-image: url(${props => props.img});
   padding: 1em;
@@ -34,6 +35,12 @@ const Wrapper = styled.div`
     font-size: 16px;
     line-height: 1.2;
   }
+  @media only screen and (max-width: 1524px) {
+    //width: calc((100%/3 - 20px)) ;
+    & .genre {
+      display: none;
+    }
+  }
 `;
 const Genre = styled.button`
   padding: 8px;
@@ -60,7 +67,7 @@ const MovieItem = ({item}) => {
                     <StarIcon/>
                     <span>{item.vote_average.toFixed(1)}</span>
                 </div>
-                <div>
+                <div className="genre">
                     {item.genre_ids.map((id,index) => {
                         return <Genre key={index}>{genreList.find(item=>item.id == id).name}</Genre>
                     })}
