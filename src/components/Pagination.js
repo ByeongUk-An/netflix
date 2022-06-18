@@ -1,5 +1,5 @@
-import React,{useState,useEffect} from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 
 const PageWrap = styled.ul`
   margin-top: 50px;
@@ -11,7 +11,7 @@ const PageItem = styled.li`
   display: flex;
   justify-content: center;
   align-items: center;
-    width: 40px;
+  width: 40px;
   height: 40px;
   background-color: red;
   border-radius: 10px;
@@ -23,7 +23,7 @@ const PageItem = styled.li`
     text-decoration: none;
     color: white;
   }
-  
+
   &.active {
     background-color: #fff;
   }
@@ -32,25 +32,58 @@ const PageItem = styled.li`
   }
 `;
 
-const Pagination = ({pages,nextPage,currentPage }) => {
-    const pageLinkes = [];
+const Pagination = ({ pages, nextPage, currentPage, totalResults }) => {
+  const [pageLinks, SetPageLinks] = useState([]);
 
-    for(let i = 1; i<= pages + 1; i++) {
-        let active = currentPage == i ? "active" : "";
+  useEffect(() => {
+    const page = Math.floor((currentPage - 1) / 10);
 
-        pageLinkes.push(<PageItem className={`waves-effect ${active}`} key={i} onClick={()=> nextPage(i)}><a href="#">{i}</a> </PageItem>)
-    }
+    const newPages = Array(10)
+      .fill()
+      .map((v, i) => i + 1 + page * 10);
+    SetPageLinks(newPages);
+  }, [currentPage]);
 
+  return (
+    <>
+      <PageWrap>
+        {currentPage > 1 ? (
+          <PageItem
+            className={`waves-effect`}
+            onClick={() => nextPage(currentPage - 1)}
+          >
+            <a href="#">Prev</a>{" "}
+          </PageItem>
+        ) : (
+          ""
+        )}
 
-    return (
-        <>
-            <PageWrap>
-                {currentPage > 1 ?<PageItem className={`waves-effect`}  onClick={()=> nextPage(currentPage - 1)}><a href="#">Prev</a> </PageItem> : ''}
-                {pageLinkes}
-                {currentPage < pages + 1 ?<PageItem className={`waves-effect`}  onClick={()=> nextPage(currentPage + 1)}><a href="#">Next</a> </PageItem> : ''}
-            </PageWrap>
-        </>
-    )
-}
+        {pageLinks.map((page, index) => {
+          let active = currentPage == page ? "active" : "";
+          if (page > totalResults) return;
+          return (
+            <PageItem
+              className={`waves-effect ${active}`}
+              key={index}
+              onClick={() => nextPage(page)}
+            >
+              <a href="#">{page}</a>{" "}
+            </PageItem>
+          );
+        })}
+        {currentPage < pages + 1 ? (
+          <PageItem
+            className={`waves-effect`}
+            onClick={() => nextPage(currentPage + 1)}
+          >
+            <a href="#">Next</a>{" "}
+          </PageItem>
+        ) : (
+          ""
+        )}
+      </PageWrap>
+    </>
+  );
+};
 
 export default Pagination;
