@@ -161,7 +161,7 @@ const MovieDetail = (props) => {
     if(loading) {
         return <ClipLoader color={"#fff"} loading={loading} css={override}  size={150} />
     }
-   console.log(video);
+
     return (
         <>
             <Navigation/>

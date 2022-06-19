@@ -20,7 +20,7 @@ const SearchMovie = (props) => {
     const [list, setList] = useState();
     const {searchname} = useParams();
     const API_KEY = process.env.REACT_APP_API_KEY;
-    console.log(list, "list");
+
     useEffect(() => {
         (async () => {
             const list = await api.get(
