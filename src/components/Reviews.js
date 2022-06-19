@@ -6,6 +6,9 @@ import styled from "styled-components";
 const ReviewList = styled.li`
   margin-bottom: 30px;
 `;
+const NoReview = styled.li`
+  text-align: center;
+`;
 
 
 const UserWrap = styled.div`
@@ -26,13 +29,12 @@ const ReviewContent = styled.div`
 
 const Reviews = ({review}) => {
     const {results} = review;
-
+    console.log(results);
     return (
         <>
             <ul>
-                {results.map((item,index)=> {
-
-                    return <ReviewList key={index}>
+                {results.length > 0 ? results.map((item,index)=> {
+                        return  <ReviewList key={index}>
                             <UserWrap>
                                 <AccountCircleOutlinedIcon/>
                                 <span>{item.author}</span>
@@ -42,7 +44,8 @@ const Reviews = ({review}) => {
                                 <div>{item.updated_at}</div>
                             </ReviewContent>
                         </ReviewList>
-                })}
+                    }) :  <NoReview>There is no review of the movie at the momentarily.</NoReview>}
+                
 
 
             </ul>

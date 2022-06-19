@@ -59,6 +59,7 @@ const RightNav = styled.div`
     font-size: 20px;
     color: #918F95;
     text-decoration: none;
+    font-weight: bold;
   }
 
   & .nav-list:hover {
@@ -85,6 +86,9 @@ const RightNav = styled.div`
     margin-right: 10px;
     height: 31px;
     line-height: 31px;
+    background: transparent;
+    border: 1px solid darkgray;
+    color: #fff;
   }
 
   & button {
@@ -113,6 +117,9 @@ const RightNav = styled.div`
   @media only screen and (max-width: 768px) {
     width: 360px;
     margin: 0 auto;
+    & .nav-list {
+      font-size: 16px;
+    }
   }
 `;
 

@@ -86,6 +86,9 @@ const ReviewWrap = styled.div`
   & .related {
     color: red;
   }
+  @media only screen and (max-width: 1000px) { 
+    margin-bottom: 0;
+  }
 `;
 const ReviewContainer = styled.div`
   max-width: 1400px;

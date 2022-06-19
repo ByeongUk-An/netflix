@@ -19,6 +19,12 @@ const RelatedList = styled.li`
     cursor: pointer;
     color: #fff;
   }
+  @media only screen and (max-width: 1024px) {
+    width: calc(100% / 2);
+  }
+  @media only screen and (max-width: 600px) {
+    width: calc(100% / 1);
+  }
 `;
 
 const RelatedItem = styled.div`

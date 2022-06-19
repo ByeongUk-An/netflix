@@ -75,7 +75,7 @@ const BgWrap = styled.div`
     & div {
       width: 100%;
       margin: 0;
-      padding: 0 20px;
+      padding: 0 10px;
       //justify-content: flex-start;
       //align-items: center;
       justify-content: center;
