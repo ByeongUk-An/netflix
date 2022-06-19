@@ -81,8 +81,6 @@ const SearchItem = ({item}) => {
                     <span>{item.vote_average}</span>
                 </div>
                 {item.genre_ids.map((id, index) => {
-                    console.log(genreList)
-
                     return <Genre key={index}>{genreList.find(item => item.id == id)?.name}</Genre>
                 })}
                 <p className="content">{contentstr}...</p>

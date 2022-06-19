@@ -161,7 +161,7 @@ const MovieDetail = (props) => {
     if(loading) {
         return <ClipLoader color={"#fff"} loading={loading} css={override}  size={150} />
     }
-
+   console.log(video);
     return (
         <>
             <Navigation/>
@@ -177,6 +177,7 @@ const MovieDetail = (props) => {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
+
                     {video && <YouTube videoId={video.data.results[0].key} opts={opts}/>}
                 </Box>
             </Modal>
