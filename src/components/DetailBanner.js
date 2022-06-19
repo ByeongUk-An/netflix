@@ -9,7 +9,8 @@ const BgWrap = styled.div`
   width: 100%;
   height: 700px;
   background-repeat: no-repeat;
-  //background-size: cover;
+  background-size: cover;
+  background-position: center;
   position: relative;
   display: flex;
   align-items: flex-end;

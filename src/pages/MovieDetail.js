@@ -19,8 +19,11 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     boxShadow: 24,
-
 };
+
+
+
+
 const opts = {
     height: '690',
     width: '1040',
@@ -93,7 +96,7 @@ const ReviewWrap = styled.div`
 const ReviewContainer = styled.div`
   max-width: 1400px;
   height: 1000px;
-  margin: 80px auto;
+  margin: 80px auto 0;
 `;
 const ReviewBoarder = styled.div`
   border: 2px solid #fff;

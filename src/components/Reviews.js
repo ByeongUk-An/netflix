@@ -25,11 +25,14 @@ const ReviewContent = styled.div`
   & div {
     text-align: right;
   }
+  & p {
+    overflow: hidden;
+  }
 `;
 
 const Reviews = ({review}) => {
     const {results} = review;
-    console.log(results);
+
     return (
         <>
             <ul>
@@ -40,7 +43,7 @@ const Reviews = ({review}) => {
                                 <span>{item.author}</span>
                             </UserWrap>
                             <ReviewContent>
-                                {item.content}
+                                <p>{item.content}</p>
                                 <div>{item.updated_at}</div>
                             </ReviewContent>
                         </ReviewList>
